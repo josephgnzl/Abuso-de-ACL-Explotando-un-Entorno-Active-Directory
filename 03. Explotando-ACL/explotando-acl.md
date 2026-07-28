@@ -1,13 +1,47 @@
-## Explotando ACL
+## Explotación del Permiso ACL
 
-Una vez que BloodHound me mostró el camino, confirmé que el usuario `adiaz` tenía el permiso `GenericWrite` sobre la cuenta del `Administrator`. Ese hallazgo fue el punto de inflexión.
+Después de analizar las relaciones obtenidas mediante BloodHound, identifiqué el camino que conectaba la cuenta comprometida `raynex.lab\adiaz` con la cuenta privilegiada `raynex.lab\Administrator`.
 
-Este permiso, en términos prácticos, le otorga a `adiaz` la capacidad de modificar atributos clave de la cuenta objetivo. Entre ellos, el más crítico es la contraseña. Active Directory permite restablecerla sin necesidad de conocer la actual, siempre que se cuente con el permiso adecuado. Esa fue la vía que aproveché.
+El análisis reveló que el usuario `adiaz` contaba con el permiso ACL:
 
-Para ejecutar el ataque utilicé `net rpc`, una herramienta nativa de Kali Linux que se comunica con los servicios RPC de Windows. Con ella, se le ordena al Controlador de Dominio que cambiara la contraseña del Administrador por una que nosotros controlamos.
-
-El comando que materializó el acceso fue el siguiente:
-
-```bash
-net rpc password ADMINISTRADOR "Raynex2026" -U "adiaz%Raynex2026" -S 10.0.0.28
+```text
+GenericWrite
 ```
+sobre el objeto correspondiente a la cuenta Administrator.
+
+Este hallazgo representaba una debilidad significativa dentro de la configuración de Active Directory, ya que una cuenta con privilegios iniciales limitados tenía la capacidad de modificar propiedades del objeto objetivo.
+
+En un entorno real, este tipo de delegaciones incorrectas pueden convertirse en una ruta directa de escalada de privilegios. El atacante no necesita explotar una vulnerabilidad del sistema operativo; simplemente abusa de permisos legítimos que fueron asignados de manera incorrecta.
+
+## Abuso de la Relación ACL
+
+Con el permiso identificado, procedí a validar el impacto real de la configuración encontrada.
+
+La relación de confianza existente era:
+
+```
+raynex.lab\adiaz
+        |
+        |
+        v
+GenericWrite
+        |
+        |
+        v
+raynex.lab\Administrator
+```
+Esta relación permitió realizar modificaciones sobre la cuenta privilegiada y avanzar desde un usuario estándar comprometido hacia una identidad con mayores privilegios dentro del dominio.
+
+## Ejecución del Ataque
+
+Para realizar la modificación utilicé net rpc, una herramienta disponible en Kali Linux que permite interactuar con servicios RPC de Windows.
+
+El objetivo era enviar una solicitud al Controlador de Dominio para modificar la contraseña de la cuenta Administrator utilizando los permisos previamente identificados.
+
+```
+net rpc password Administrator "Raynex2026" -U "adiaz%Raynex2026" -S 10.0.0.28
+```
+
+## Resultado
+
+La operación fue ejecutada correctamente, demostrando que la cuenta comprometida inicialmente podía afectar directamente una cuenta administrativa del dominio.
