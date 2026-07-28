@@ -2,17 +2,19 @@
 
 Esta fase representó el punto inicial del compromiso dentro del entorno Active Directory.
 
- Ofensivamente contaba con credenciales válidas pertenecientes a un usuario del dominio, permitiendome la autenticación legítima contra los servicios internos.
+Durante esta etapa contaba con credenciales válidas pertenecientes a un usuario del dominio, lo que me permitió realizar una autenticación legítima contra los servicios internos del entorno.
 
-A diferencia de un compromiso externo basado en explotación directa de servicios, este escenario muestra perfectamente una situación común en entornos empresariales: el atacante obtiene acceso utilizando una identidad legítima y posteriormente analiza las relaciones y permisos existentes dentro del dominio.
+A diferencia de un compromiso externo basado en la explotación directa de servicios expuestos, este escenario representa una situación común dentro de ambientes empresariales: un atacante logra obtener acceso utilizando una identidad válida y posteriormente comienza a analizar la estructura del dominio, las relaciones entre objetos y los permisos asignados con el objetivo de identificar posibles rutas de escalada de privilegios.
+
+El objetivo en esta fase no era comprometer directamente el controlador de dominio, sino establecer el punto de entrada y comprender qué nivel de acceso poseía la cuenta comprometida dentro del entorno.
 
 ## Validación de Credenciales
 
-Antes de iniciar la enumeración del entorno, validé que las credenciales obtenidas sean funcionales contra los servicios de Active Directory.
+Antes de iniciar cualquier proceso de enumeración, validé que las credenciales obtenidas fueran funcionales contra los servicios de Active Directory.
+
+Para esta validación utilicé **NetExec**, comprobando la autenticación SMB contra el controlador de dominio.
 
 ```bash
 netexec smb 10.0.0.28 -u 'adiaz' -p 'Raynex2026' -d 'raynex.lab'
-```
-
 ## Resultado
 [+] raynex.lab\adiaz:Raynex2026 STATUS_LOGON_SUCCESS
