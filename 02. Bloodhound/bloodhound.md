@@ -46,7 +46,14 @@ Control sobre cuenta objetivo
         |
         v
 Escalada de privilegios
-
 ```
+Durante el análisis del grafo generado en BloodHound, identifiqué una relación de permisos crítica dentro del dominio `raynex.lab`.
+
+La cuenta comprometida:
+
+```text
+raynex.lab\adiaz
+```
+contaba con permisos ACL delegados sobre la cuenta privilegiada `raynex.lab\Administrator`
 
 Esta configuración me permitió construir una ruta de ataque hacia la cuenta Administrador con mayores privilegios dentro del dominio.
