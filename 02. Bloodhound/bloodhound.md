@@ -13,7 +13,7 @@ Mediante la información recolectada pude analizar las relaciones existentes ent
 - ¿Hay caminos indirectos que permitan alcanzar privilegios elevados?
 
 
-## Representación 
+## Ejecución 
 
 ```
 bloodhound-python -c All -u adiaz -p 'Raynex2026' -d 'raynex.lab' -ns '10.0.0.28'
