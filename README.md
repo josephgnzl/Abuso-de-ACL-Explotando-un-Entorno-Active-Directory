@@ -6,31 +6,22 @@ El objetivo es demostrar cómo un simple error en la delegación de permisos pue
 ## Cadena de Ataque
 
 ```text
-Acceso Mediante Credenciales válidas
+Credenciales válidas
         |
         v
-Enumeración de Active Directory
+Usuario estándar (adiaz)
         |
         v
-Recolección Completa del Dominio con BloodHound
+Enumeración con BloodHound
         |
         v
-Análisis del grafo de relaciones
+Identificación de GenericWrite sobre Administrator
         |
         v
-Identificación de ACL vulnerable
+Abuso de permisos ACL
         |
         v
-Abuso de permisos sobre objeto privilegiado
-        |
-        v
-Escalada de privilegios
-        |
-        v
-Obtención de acceso remoto con Evil-WinRM
-        |
-        v
-Ejecución remota de comandos
+Compromiso de cuenta privilegiada
 ```
 ## ¿Qué es ACL?
 Una ACL (Access Control List o Lista de Control de Acceso) en Active Directory es una lista de permisos de seguridad asociada a un objeto como un usuario, grupo, equipo o unidad organizativa que define qué usuarios o grupos pueden acceder a él y qué acciones pueden realizar (escribir, borrar o cambiar contraseñas).
