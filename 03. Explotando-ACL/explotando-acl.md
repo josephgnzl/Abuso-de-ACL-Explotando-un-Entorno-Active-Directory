@@ -1,22 +1,13 @@
 ## Explotando ACL
 
-Una vez identificado el borde `GenericWrite` desde `adiaz` hacia `Administrator` (o `ADMINISTRADOR`), se procede a abusar de este permiso para tomar el control del dominio.
+Una vez que BloodHound me mostró el camino, confirmé que el usuario `adiaz` tenía el permiso `GenericWrite` sobre la cuenta del `Administrator`. Ese hallazgo fue el punto de inflexión.
 
-### ¿Qué significa `GenericWrite`?
+Este permiso, en términos prácticos, le otorga a `adiaz` la capacidad de modificar atributos clave de la cuenta objetivo. Entre ellos, el más crítico es la contraseña. Active Directory permite restablecerla sin necesidad de conocer la actual, siempre que se cuente con el permiso adecuado. Esa fue la vía que aproveché.
 
-Este permiso otorga a `adiaz` la capacidad de modificar **cualquier atributo** del objeto `Administrator`, incluyendo:
+Para ejecutar el ataque utilicé `net rpc`, una herramienta nativa de Kali Linux que se comunica con los servicios RPC de Windows. Con ella, se le ordena al Controlador de Dominio que cambiara la contraseña del Administrador por una que nosotros controlamos.
 
-- `unicodePwd` → Contraseña del usuario.
-- `member` → Pertenencia a grupos (si se aplica sobre un grupo).
-- `sAMAccountName` → Nombre de la cuenta.
-- `servicePrincipalName` → SPNs (para Kerberoasting).
-
-**En este caso, abusamos de la capacidad de restablecer la contraseña sin conocer la actual.**
-
-### Comando utilizado
-
-Para abusar del permiso identificado se utilizó `net rpc`, aprovechando la capacidad de modificar la contraseña del usuario objetivo mediante los servicios RPC de Windows (protocolo SAMR sobre SMB).
+El comando que materializó el acceso fue el siguiente:
 
 ```bash
-net rpc password ADMINISTRADOR "Raynex2026" -U "adiaz%Raynex2026" -S 192.168.0.110
+net rpc password ADMINISTRADOR "Raynex2026" -U "adiaz%Raynex2026" -S 10.0.0.28
 ```
