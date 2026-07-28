@@ -1,8 +1,6 @@
 ## Bloodhound 
 Luego de obtener credenciales válidas dentro del dominio `raynex.lab`, inicié la fase de enumeración de Active Directory.
-
 El objetivo de esta etapa era obtener una representación del entorno interno del dominio, identificando relaciones entre usuarios, grupos, equipos y permisos asignados.
-
 La información recolectada me permitió descubrir rutas de escalada de privilegios mediante configuraciones inseguras dentro del entorno corporativo.
 
 ## Representación 
@@ -30,14 +28,11 @@ Estos archivos contienen información necesaria para construir el grafo de relac
 ```
 Usuario comprometido
         |
-        |
         v
 Permiso ACL excesivo
         |
-        |
         v
 Control sobre cuenta objetivo
-        |
         |
         v
 Escalada de privilegios
