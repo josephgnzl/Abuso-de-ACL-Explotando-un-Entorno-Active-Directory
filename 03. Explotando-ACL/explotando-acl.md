@@ -45,3 +45,5 @@ net rpc password Administrator "Raynex2026" -U "adiaz%Raynex2026" -S 10.0.0.28
 ## Resultado
 
 La operación fue ejecutada correctamente, demostrando que la cuenta comprometida inicialmente podía afectar directamente una cuenta administrativa del dominio.
+
+Una mala asignación de ACLs puede convertir una cuenta de bajo privilegio en un punto de entrada hacia el control administrativo del dominio.
