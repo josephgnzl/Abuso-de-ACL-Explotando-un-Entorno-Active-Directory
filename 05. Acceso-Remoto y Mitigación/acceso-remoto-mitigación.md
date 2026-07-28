@@ -18,3 +18,14 @@ evil-winrm -i '10.0.0.28'  -u 'Administrador' -p 'Raynex2026'
 ## Resultado 
 
 *Evil-WinRM* PS C:\Users\Administrador\Documents>
+
+## Mitigación
+
+- Revisar y corregir permisos ACL innecesarios dentro de Active Directory.
+- Eliminar permisos excesivos como:
+  - GenericAll
+  - GenericWrite
+  - WriteDacl
+  - WriteOwner
+  - ForceChangePassword
+
