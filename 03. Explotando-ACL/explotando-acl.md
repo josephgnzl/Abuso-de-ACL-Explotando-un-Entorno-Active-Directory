@@ -11,7 +11,7 @@ sobre el objeto correspondiente a la cuenta Administrator.
 
 Este hallazgo representaba una debilidad significativa dentro de la configuración de Active Directory, ya que una cuenta con privilegios iniciales limitados tenía la capacidad de modificar propiedades del objeto objetivo.
 
-En un entorno real, este tipo de delegaciones incorrectas pueden convertirse en una ruta directa de escalada de privilegios. El atacante no necesita explotar una vulnerabilidad del sistema operativo; simplemente abusa de permisos legítimos que fueron asignados de manera incorrecta.
+Este tipo de delegaciones incorrectas pueden convertirse en una ruta directa de escalada de privilegios. El atacante no necesita explotar una vulnerabilidad del sistema operativo; simplemente abusa de permisos legítimos que fueron asignados de manera incorrecta.
 
 ## Abuso de la Relación ACL
 
