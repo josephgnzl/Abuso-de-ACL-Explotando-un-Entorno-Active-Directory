@@ -36,8 +36,8 @@ Para prevenir este tipo de escaladas de privilegios mediante abuso de ACLs, sugi
 - Revisar periódicamente las delegaciones de permisos dentro del dominio para identificar asignaciones innecesarias o configuraciones incorrectas.
 - Aplicar estrictamente el principio de mínimo privilegio, garantizando que usuarios, grupos y objetos únicamente posean los permisos necesarios para cumplir sus funciones.
 - Eliminar permisos excesivos sobre cuentas privilegiadas y objetos críticos del dominio.
+- 
 - Auditar especialmente la presencia de permisos sensibles como:
-
   - `GenericAll`
   - `GenericWrite`
   - `WriteDACL`
@@ -45,4 +45,5 @@ Para prevenir este tipo de escaladas de privilegios mediante abuso de ACLs, sugi
   - `ForceChangePassword`
 
 Hack the Planet 
-Joseph 
+
+- Joseph 
