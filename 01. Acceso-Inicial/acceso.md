@@ -6,7 +6,6 @@ Durante esta etapa contaba con credenciales válidas pertenecientes a un usuario
 
 A diferencia de un compromiso externo basado en la explotación directa de servicios expuestos, este escenario representa una situación común dentro de ambientes empresariales: un atacante logra obtener acceso utilizando una identidad válida y posteriormente comienza a analizar la estructura del dominio, las relaciones entre objetos y los permisos asignados con el objetivo de identificar posibles rutas de escalada de privilegios.
 
-El objetivo en esta fase no era comprometer directamente el controlador de dominio, sino establecer el punto de entrada y comprender qué nivel de acceso poseía la cuenta comprometida dentro del entorno.
 
 ## Validación de Credenciales
 
